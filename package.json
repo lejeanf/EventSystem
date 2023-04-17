@@ -1,0 +1,25 @@
+{
+  "name":"fr.jeanf.eventsystem",
+  "version":"0.0.1",
+  "displayName":"Event System",
+  "description":"This package contains a basic Event System based on Scriptable Objects as communication medium",
+  "unity": "2021.3",
+  "keywords": [
+    "jeanf",
+    "event system"
+  ],
+  "author":{
+    "name":"Jean-François Robin",
+    "email":"robin.jeanfrancois@gmail.com",
+    "url":"https://jeanfrancoisrobin.art"
+  },
+  "dependencies": {
+  },
+  "samples": [
+        {
+            "displayName": "Channels",
+            "description": "A set of usefull default channels",
+            "path": "Samples/Channels"
+        }
+    ]
+}
