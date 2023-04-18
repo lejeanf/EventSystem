@@ -1,13 +1,22 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// A flexible handler for void events in the form of a MonoBehaviour. Responses can be connected directly from the Unity Inspector.
-/// </summary>namespace jeanf.EventSystemnamespace jeanf.EventSystem
 namespace jeanf.EventSystem
-{
-    public class VoidEventListener : MonoBehaviour
+{[System.Serializable]
+    public class VoidEvent : UnityEvent<object>
     {
+        
+    }
+    public class VoidEventListener : MonoBehaviour, IDebugBehaviour
+    {
+        public bool isDebug
+        { 
+            get => _isDebug;
+            set => _isDebug = value; 
+        }
+        [SerializeField] private bool _isDebug = false;
+        
         [SerializeField] private VoidEventChannelSO _channel = default;
 
         public UnityEvent OnEventRaised;
@@ -16,6 +25,7 @@ namespace jeanf.EventSystem
         {
             if (_channel != null)
                 _channel.OnEventRaised += Respond;
+            if(_isDebug) Debug.Log($"received event on channel {_channel.name}.");
         }
 
         private void OnDisable()
@@ -26,8 +36,8 @@ namespace jeanf.EventSystem
 
         private void Respond()
         {
-            if (OnEventRaised != null)
-                OnEventRaised.Invoke();
+            OnEventRaised?.Invoke();
         }
+
     }
 }

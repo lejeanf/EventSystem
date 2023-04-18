@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,8 +11,7 @@ namespace jeanf.EventSystem
 
         public void RaiseEvent()
         {
-            if (OnEventRaised != null)
-                OnEventRaised.Invoke();
+            OnEventRaised?.Invoke();
         }
     }
 }

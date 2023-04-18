@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// To use a generic UnityEvent type you must override the generic type.
-/// </summary>
 namespace jeanf.EventSystem
 {
     [System.Serializable]
@@ -12,9 +9,6 @@ namespace jeanf.EventSystem
 
     }
 
-    /// <summary>
-    /// A flexible handler for int events in the form of a MonoBehaviour. Responses can be connected directly from the Unity Inspector.
-    /// </summary>
     public class StringEventListener : MonoBehaviour
     {
         [SerializeField] private StringEventChannelSO _channel = default;
