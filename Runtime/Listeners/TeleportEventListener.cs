@@ -18,14 +18,12 @@ namespace jeanf.EventSystem
 
         private void OnEnable()
         {
-            if (_channel != null)
-                _channel.OnEventRaised += Respond;
+            if (_channel != null) _channel.OnEventRaised += Respond;
         }
 
         private void OnDisable()
         {
-            if (_channel != null)
-                _channel.OnEventRaised -= Respond;
+            if (_channel != null) _channel.OnEventRaised -= Respond;
         }
 
         private void Respond( TeleportInformation teleportInformation)

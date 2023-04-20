@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.TextCore.Text;
 using UnityEngine;
 
 namespace jeanf.EventSystem
@@ -10,6 +11,7 @@ namespace jeanf.EventSystem
         public Transform objectToTeleport;
         public Transform targetDestination;
         public bool alignToTarget;
+        public FilterSO filter;
         
         public TeleportInformation(Transform targetDestination, bool alignToTarget)
         {
@@ -18,12 +20,13 @@ namespace jeanf.EventSystem
             this.objectIsPlayer = true;
         }
 		
-        public TeleportInformation(Transform objectToTeleport, Transform targetDestination, bool alignToTarget, bool objectIsPlayer)
+        public TeleportInformation(Transform objectToTeleport, Transform targetDestination, bool alignToTarget, bool objectIsPlayer, FilterSO filter)
         {
             this.objectToTeleport = objectToTeleport;
             this.targetDestination = targetDestination;
             this.alignToTarget = alignToTarget;
             this.objectIsPlayer = objectIsPlayer;
+            this.filter = filter;
         }
     }
 }
