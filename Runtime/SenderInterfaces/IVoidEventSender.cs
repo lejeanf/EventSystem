@@ -5,6 +5,6 @@ namespace jeanf.EventSystem
 {
     public interface IVoidEventSender
     {
-        VoidEventChannelSO boolMessageChannel { get; set; }
+        VoidEventChannelSO voidMessageChannel { get; set; }
     }
 }
