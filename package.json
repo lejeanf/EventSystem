@@ -1,6 +1,6 @@
 {
   "name":"fr.jeanf.eventsystem",
-  "version":"0.1.1",
+  "version":"0.1.2",
   "displayName":"Event System",
   "description":"This package contains a basic Event System based on Scriptable Objects as communication medium",
   "unity": "2021.3",
