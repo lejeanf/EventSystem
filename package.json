@@ -1,6 +1,6 @@
 {
   "name":"fr.jeanf.eventsystem",
-  "version":"0.1.0",
+  "version":"0.1.1",
   "displayName":"Event System",
   "description":"This package contains a basic Event System based on Scriptable Objects as communication medium",
   "unity": "2021.3",
@@ -17,11 +17,6 @@
     "fr.jeanf.propertydrawer": "1.0.0"
   },
   "samples": [
-        {
-            "displayName": "Default Channels",
-            "description": "A set of useful default channels",
-            "path": "Samples/DefaultChannels"
-        },
         {
           "displayName": "Player Channels",
           "description": "A set of channels used for the vr_player package",
