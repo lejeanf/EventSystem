@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace jeanf.EventSystem
-{[System.Serializable]
+{
+    [System.Serializable]
     public class VoidEvent : UnityEvent<object>
     {
         
