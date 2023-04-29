@@ -15,8 +15,15 @@ namespace jeanf.EventSystem
 	/// <summary>
 	/// A flexible handler for int events in the form of a MonoBehaviour. Responses can be connected directly from the Unity Inspector.
 	/// </summary>
-	public class BoolEventListener : MonoBehaviour
+	public class BoolEventListener : MonoBehaviour, IDebugBehaviour
 	{
+		public bool isDebug
+		{ 
+		    get => _isDebug;
+		    set => _isDebug = value; 
+		}
+		[SerializeField] private bool _isDebug = false;
+		
 		[SerializeField] private BoolEventChannelSO _channel = default;
 
 		public BoolEvent OnEventRaised;
@@ -36,6 +43,7 @@ namespace jeanf.EventSystem
 		private void Respond(bool value)
 		{
 			OnEventRaised?.Invoke(value);
+			if(isDebug) Debug.Log($" bool event raised: {value}");
 		}
 	}
 }
