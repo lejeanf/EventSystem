@@ -1,3 +1,4 @@
+using System;
 using jeanf.EventSystem;
 using UnityEngine;
 
@@ -11,7 +12,14 @@ public class VoidEventSender : MonoBehaviour, IDebugBehaviour
     [SerializeField] private bool _isDebug = false;
 
     [field: Header("Broadcasting on:")] public VoidEventChannelSO voidMessageChannel;
-    
+
+    [SerializeField] private bool sendEventOnAwake = true;
+
+    private void Awake()
+    {
+        if(sendEventOnAwake) SendVoidEvent();
+    }
+
     public void SendVoidEvent()
     {
         voidMessageChannel.RaiseEvent();
