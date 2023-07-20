@@ -7,7 +7,7 @@ using UnityEngine.Events;
 /// </summary>
 namespace jeanf.EventSystem
 {
-	[CreateAssetMenu(menuName = "Events/Int Event Channel")]
+	[CreateAssetMenu(menuName = "Events/Float Event Channel")]
 	public class FloatEventChannelSO : DescriptionBaseSO
 	{
 		public UnityAction<float> OnEventRaised;
