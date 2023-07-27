@@ -1,19 +1,22 @@
-using jeanf.EventSystem;
 using UnityEngine;
 
-public class ScriptableObjectEventSender : MonoBehaviour, IDebugBehaviour
+namespace jeanf.EventSystem
 {
-    public bool isDebug
-    { 
-        get => _isDebug;
-        set => _isDebug = value; 
-    }
-    [SerializeField] private bool _isDebug = false;
-
-    [field: Header("Broadcasting on:")] public ScriptableObjectEventChannelSO scriptableObjectMessageChannel;
-    
-    public void SendScriptableObject(string id, ScriptableObject value)
+    public class ScriptableObjectEventSender : MonoBehaviour, IDebugBehaviour
     {
-        scriptableObjectMessageChannel.RaiseEvent(id, value);
+        public bool isDebug
+        { 
+            get => _isDebug;
+            set => _isDebug = value; 
+        }
+        [SerializeField] private bool _isDebug = false;
+
+        [field: Header("Broadcasting on:")] public ScriptableObjectEventChannelSO scriptableObjectMessageChannel;
+    
+        public void SendScriptableObject(string id, ScriptableObject value)
+        {
+            scriptableObjectMessageChannel.RaiseEvent(id, value);
+        }
     }
 }
+
