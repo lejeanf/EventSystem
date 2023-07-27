@@ -1,6 +1,6 @@
 {
   "name":"fr.jeanf.eventsystem",
-  "version":"0.1.67",
+  "version":"0.1.68",
   "displayName":"Event System",
   "description":"This package contains a basic Event System based on Scriptable Objects as communication medium",
   "unity": "2021.3",
@@ -14,7 +14,7 @@
     "url":"https://jeanfrancoisrobin.art"
   },
   "dependencies": {
-    "fr.jeanf.propertydrawer": "1.0.0"
+    "fr.jeanf.propertydrawer": "1.0.5"
   },
   "samples": [
         {

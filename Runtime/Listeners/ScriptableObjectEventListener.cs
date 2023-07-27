@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -8,7 +7,7 @@ using UnityEngine.Events;
 namespace jeanf.EventSystem
 {
 	[System.Serializable]
-	public class DateTimeEvent : UnityEvent<DateTime>
+	public class ScriptableObjectEvent : UnityEvent<ScriptableObject>
 	{
 
 	}
@@ -16,7 +15,7 @@ namespace jeanf.EventSystem
 	/// <summary>
 	/// A flexible handler for int events in the form of a MonoBehaviour. Responses can be connected directly from the Unity Inspector.
 	/// </summary>
-	public class DateTimeEventListener : MonoBehaviour, IDebugBehaviour
+	public class ScriptableObjectEventListener : MonoBehaviour, IDebugBehaviour
 	{
 		public bool isDebug
 		{ 
@@ -25,9 +24,9 @@ namespace jeanf.EventSystem
 		}
 		[SerializeField] private bool _isDebug = false;
 		
-		[SerializeField] private DateTimeEventChannelSO _channel = default;
+		[SerializeField] private ScriptableObjectEventChannelSO _channel = default;
 
-		public DateTimeEvent OnEventRaised;
+		public ScriptableObjectEvent OnEventRaised;
 
 		private void OnEnable()
 		{
@@ -41,7 +40,7 @@ namespace jeanf.EventSystem
 				_channel.OnEventRaised -= Respond;
 		}
 
-		private void Respond(DateTime value)
+		private void Respond(string id, ScriptableObject value)
 		{
 			OnEventRaised?.Invoke(value);
 			if(isDebug) Debug.Log($" bool event raised: {value}");
