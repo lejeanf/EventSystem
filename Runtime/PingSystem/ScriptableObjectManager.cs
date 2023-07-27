@@ -18,7 +18,11 @@ public class ScriptableObjectManager : MonoBehaviour, IDebugBehaviour
 
     private Dictionary<Object, Dictionary<string, Object>> genericDictionary = new Dictionary<Object, Dictionary<string, Object>>();
 
-    private void Awake()
+    private void OnEnable() => Subscribe();
+    private void OnDisable() => Unsubscribe();
+    private void OnDestroy() => Unsubscribe();
+
+    private void Subscribe()
     {
         foreach (var so in listOfPingableObjects)
         {
@@ -26,11 +30,10 @@ public class ScriptableObjectManager : MonoBehaviour, IDebugBehaviour
             so.OnEventRaised += RegisterSO;
             so.OnEventRemove += RemoveSOFromLists;
         }
+        RefreshPingableObjects.RaiseEvent();
     }
 
-    private void OnEnable() => RefreshPingableObjects.RaiseEvent();
-
-    private void OnDestroy()
+    private void Unsubscribe()
     {
         foreach (var so in listOfPingableObjects)
         {
@@ -38,6 +41,8 @@ public class ScriptableObjectManager : MonoBehaviour, IDebugBehaviour
             so.OnEventRaised -= null;
             so.OnEventRemove -= null;
         }
+        genericDictionary.Clear();
+        genericDictionary.TrimExcess();
     }
 
     private void RegisterSO(string id, ScriptableObject so)
