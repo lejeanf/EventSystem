@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using jeanf.EventSystem;
 using UnityEngine;
 
 namespace jeanf.EventSystem
