@@ -13,7 +13,7 @@ namespace jeanf.EventSystem
 
         [field: Header("Broadcasting on:")] public IntBoolEventChannelSO boolMessageChannel;
     
-        public void SendBool(int nb, bool value)
+        public void SendIntBool(int nb, bool value)
         {
             boolMessageChannel.RaiseEvent(nb, value);
         }
