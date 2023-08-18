@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class BoolEventSender : MonoBehaviour, IDebugBehaviour
+    public class StringEventSender : MonoBehaviour, IDebugBehaviour
     {
         public bool isDebug
         { 
@@ -11,11 +11,11 @@ namespace jeanf.EventSystem
         }
         [SerializeField] private bool _isDebug = false;
 
-        [field: Header("Broadcasting on:")] public BoolEventChannelSO boolMessageChannel;
+        [field: Header("Broadcasting on:")] public StringEventChannelSO stringMessageChannel;
     
-        public void SendBool(bool value)
+        public void SendString(string value)
         {
-            boolMessageChannel.RaiseEvent(value);
+            stringMessageChannel.RaiseEvent(value);
         }
     }
 }

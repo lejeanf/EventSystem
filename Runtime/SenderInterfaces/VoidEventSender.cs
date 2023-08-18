@@ -1,27 +1,28 @@
-using System;
-using jeanf.EventSystem;
 using UnityEngine;
 
-public class VoidEventSender : MonoBehaviour, IDebugBehaviour
+namespace jeanf.EventSystem
 {
-    public bool isDebug
-    { 
-        get => _isDebug;
-        set => _isDebug = value; 
-    }
-    [SerializeField] private bool _isDebug = false;
-
-    [field: Header("Broadcasting on:")] public VoidEventChannelSO voidMessageChannel;
-
-    [SerializeField] private bool sendEventOnAwake = true;
-
-    private void Awake()
+    public class VoidEventSender : MonoBehaviour, IDebugBehaviour
     {
-        if(sendEventOnAwake) SendVoidEvent();
-    }
+        public bool isDebug
+        { 
+            get => _isDebug;
+            set => _isDebug = value; 
+        }
+        [SerializeField] private bool _isDebug = false;
 
-    public void SendVoidEvent()
-    {
-        voidMessageChannel.RaiseEvent();
+        [field: Header("Broadcasting on:")] public VoidEventChannelSO voidMessageChannel;
+
+        [SerializeField] private bool sendEventOnAwake = true;
+
+        private void Awake()
+        {
+            if(sendEventOnAwake) SendVoidEvent();
+        }
+
+        public void SendVoidEvent()
+        {
+            voidMessageChannel.RaiseEvent();
+        }
     }
 }
