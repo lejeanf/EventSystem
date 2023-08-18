@@ -13,7 +13,10 @@ namespace jeanf.EventSystem
         [SerializeField] private bool _isDebug = false;
     
         [SerializeField] private VoidEventChannelSO refreshPingableObjects;
-        [ReadOnly] [SerializeField] private string id = Guid.NewGuid().ToString();
+        #if UNITY_EDITOR
+        [ReadOnly] 
+        #endif
+        [SerializeField] private string id = Guid.NewGuid().ToString();
     
         public ScriptableObjectEventChannelSO channel
         {
