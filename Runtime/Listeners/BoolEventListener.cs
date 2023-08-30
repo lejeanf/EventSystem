@@ -25,6 +25,7 @@ namespace jeanf.EventSystem
 		[SerializeField] private bool _isDebug = false;
 		
 		[SerializeField] private BoolEventChannelSO _channel = default;
+		[SerializeField] private bool invertIncomingValue = false;
 
 		public BoolEvent OnEventRaised;
 
@@ -42,6 +43,7 @@ namespace jeanf.EventSystem
 
 		private void Respond(bool value)
 		{
+			if (invertIncomingValue) value = !value;
 			OnEventRaised?.Invoke(value);
 			if(isDebug) Debug.Log($" bool event raised: {value}");
 		}
