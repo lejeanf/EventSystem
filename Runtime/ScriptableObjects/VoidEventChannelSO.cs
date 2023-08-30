@@ -14,4 +14,5 @@ namespace jeanf.EventSystem
             OnEventRaised?.Invoke();
         }
     }
+    
 }
