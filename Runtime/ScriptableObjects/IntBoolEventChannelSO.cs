@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace jeanf.EventSystem
 {
-    [CreateAssetMenu(menuName = "Events/<Int,Bool> Event Channel")]
+    [CreateAssetMenu(menuName = "Events/Advanced/<Int,Bool> Event Channel")]
     
     public class IntBoolEventChannelSO : DescriptionBaseSO
     {
