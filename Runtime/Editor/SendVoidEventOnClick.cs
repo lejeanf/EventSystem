@@ -4,7 +4,7 @@ using jeanf.EventSystem;
 using UnityEditor;
 using UnityEngine;
 
-namespace uvs.tools
+namespace jeanf.EventSystem
 {
     public class SendVoidEventOnClick : MonoBehaviour
     {
