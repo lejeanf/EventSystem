@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
+    using jeanf.propertyDrawer;
     public class PingableScriptableObject : MonoBehaviour, IScriptableObjectEventSender, IScriptableObjectEventListener, IDebugBehaviour
     {
         public bool isDebug

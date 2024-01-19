@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 
 namespace jeanf.EventSystem
 {
+    using jeanf.propertyDrawer;
     public class TransformEventSender : MonoBehaviour, IDebugBehaviour
     {
         public bool isDebug
