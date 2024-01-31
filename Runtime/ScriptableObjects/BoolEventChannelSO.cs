@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace jeanf.EventSystem
 {
 	[CreateAssetMenu(menuName = "Events/Bool Event Channel")]
-	public class BoolEventChannelSO : DescriptionBaseSO
+	public class BoolEventChannelSO : DescriptionBaseSO, RaiseEvent
 	{
 		public UnityAction<bool> OnEventRaised;
 
