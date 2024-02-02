@@ -1,10 +1,8 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using jeanf.propertyDrawer;
 
 namespace jeanf.EventSystem
 {
-    using jeanf.propertyDrawer;
     public class TransformEventSender : MonoBehaviour, IDebugBehaviour
     {
         public bool isDebug
