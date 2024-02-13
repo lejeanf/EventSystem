@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace jeanf.EventSystem
@@ -9,5 +9,12 @@ namespace jeanf.EventSystem
 	public abstract class DescriptionBaseSO : SerializableScriptableObject
 	{
 		[TextArea] public string description;
+
+
+		public void DelegateMethod(Action action)
+        {
+			action?.Invoke();
+        }
+
 	}
 }

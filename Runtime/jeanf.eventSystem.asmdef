@@ -2,7 +2,8 @@
     "name": "jeanf.eventsystem",
     "rootNamespace": "",
     "references": [
-        "GUID:e8958e6939af7314a97769de4be4ce25"
+        "GUID:e8958e6939af7314a97769de4be4ce25",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

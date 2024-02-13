@@ -1,31 +1,31 @@
 {
-  "name":"fr.jeanf.eventsystem",
-  "version":"0.1.86",
-  "displayName":"Event System",
-  "description":"This package contains a basic Event System based on Scriptable Objects as communication medium",
+  "name": "fr.jeanf.eventsystem",
+  "version": "0.1.87",
+  "displayName": "Event System",
+  "description": "This package contains a basic Event System based on Scriptable Objects as communication medium",
   "unity": "2021.3",
   "keywords": [
     "jeanf",
     "event system"
   ],
-  "author":{
-    "name":"Jean-François Robin",
-    "email":"robin.jeanfrancois@gmail.com",
-    "url":"https://jeanfrancoisrobin.art"
+  "author": {
+    "name": "Jean-François Robin",
+    "email": "robin.jeanfrancois@gmail.com",
+    "url": "https://jeanfrancoisrobin.art"
   },
   "dependencies": {
     "fr.jeanf.propertydrawer": "1.0.5"
   },
   "samples": [
-        {
-          "displayName": "Player Channels",
-          "description": "A set of channels used for the vr_player package",
-          "path": "Samples/PlayerChannels"
-        },
-        {
-          "displayName": "Event filters",
-          "description": "A set of filters to segregate messages sent on the same channel",
-          "path": "Samples/Filters"
-        }
-    ]
+    {
+      "displayName": "Player Channels",
+      "description": "A set of channels used for the vr_player package",
+      "path": "Samples/PlayerChannels"
+    },
+    {
+      "displayName": "Event filters",
+      "description": "A set of filters to segregate messages sent on the same channel",
+      "path": "Samples/Filters"
+    }
+  ]
 }
