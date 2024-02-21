@@ -12,11 +12,11 @@ namespace jeanf.EventSystem
         }
         [SerializeField] private bool _isDebug = false;
         [SerializeField] private bool _sendTransfromOnAwake;
-        [SerializeField] private bool _sendCustomTransform;
+        [SerializeField] private static bool _sendCustomTransform;
         [DrawIf("_sendCustomTransform", true, ComparisonType.Equals)]
         [SerializeField] private Transform _transform;
 
-        [field: Header("Broadcasting on:")] public TransformEventChannelSO transformMessageChannel;
+        [Header("Broadcasting on:")] public TransformEventChannelSO transformMessageChannel;
     
         public void SendTransform(Transform value)
         {
