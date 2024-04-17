@@ -7,7 +7,7 @@ using UnityEngine.Events;
 /// </summary>
 namespace jeanf.EventSystem
 {
-	[CreateAssetMenu(menuName = "Events/Float Event Channel")]
+	[CreateAssetMenu(menuName = "Events/Decimal Event Channel")]
 	public class DecimalEventChannelSO : DescriptionBaseSO
 	{
 		public UnityAction<decimal> OnEventRaised;
