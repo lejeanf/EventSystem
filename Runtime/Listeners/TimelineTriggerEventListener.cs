@@ -26,7 +26,7 @@ namespace jeanf.EventSystem
 		}
 		[SerializeField] private bool _isDebug = false;
 		
-		[SerializeField] private TimelineTriggerEventChannelSO _channel = default;
+		[SerializeField] private TimelineTriggerEventChannelSO _channel;
 		[SerializeField] private PlayableDirector _playableDirectorToControl;
 		[Tooltip("Use this if you want to override the timeline assigned to the playable director.")]
 		[SerializeField] private bool assignTimelineToPlayableDirector = true;
@@ -52,15 +52,17 @@ namespace jeanf.EventSystem
 			if (assignTimelineToPlayableDirector) _playableDirectorToControl.playableAsset = timeline;
 			if(timeline != _playableDirectorToControl.playableAsset) return;
 			OnEventRaised?.Invoke(timeline, value); 
-			if (value)
+			switch (value)
 			{
-				_playableDirectorToControl.Play();
+				case true:
+					_playableDirectorToControl.Play();
+					if(isDebug) Debug.Log($" received timeline play instruction: <{timeline},{value}>");
+					break;
+				case false when timeline == _playableDirectorToControl.playableAsset:
+					_playableDirectorToControl.Stop();
+					if(isDebug) Debug.Log($" received timeline stop instruction: <{timeline},{value}>");
+					break;
 			}
-			else
-			{
-				_playableDirectorToControl.Stop();
-			}
-			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>");
 		}
 	}
 }
