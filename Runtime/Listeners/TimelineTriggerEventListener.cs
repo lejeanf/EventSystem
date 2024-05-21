@@ -52,17 +52,15 @@ namespace jeanf.EventSystem
 			if (assignTimelineToPlayableDirector) _playableDirectorToControl.playableAsset = timeline;
 			if(timeline != _playableDirectorToControl.playableAsset) return;
 			OnEventRaised?.Invoke(timeline, value); 
-			switch (value)
+			if (value)
 			{
-				case true:
-					_playableDirectorToControl.Play();
-					if(isDebug) Debug.Log($" received timeline play instruction: <{timeline},{value}>");
-					break;
-				case false when timeline == _playableDirectorToControl.playableAsset:
-					_playableDirectorToControl.Stop();
-					if(isDebug) Debug.Log($" received timeline stop instruction: <{timeline},{value}>");
-					break;
+				_playableDirectorToControl.Play();
 			}
+			else
+			{
+				_playableDirectorToControl.Stop();
+			}
+			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>");
 		}
 	}
 }
