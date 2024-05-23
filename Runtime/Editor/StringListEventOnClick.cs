@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class SendStringListEventOnClick : MonoBehaviour
+    public class StringListEventOnClick : MonoBehaviour
     {
         [Header("Broadcasting On:")]
         [SerializeField] private StringListEventChannelSO testChannel;
@@ -20,13 +20,13 @@ namespace jeanf.EventSystem
         }
     }
 
-    [CustomEditor(typeof(SendStringListEventOnClick))]
+    [CustomEditor(typeof(StringListEventOnClick))]
     public class SendStringEventOnClickEditor: Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-            var eventToSend = (BoolEventOnClick)target;
+            var eventToSend = (StringListEventOnClick)target;
             if(GUILayout.Button("Send String List", GUILayout.Height(30)))
             {
                 eventToSend.CallFunction();
