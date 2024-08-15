@@ -49,6 +49,7 @@ namespace jeanf.EventSystem
 
 		private void Respond(PlayableAsset timeline, bool value)
 		{
+			Debug.Log("STARTING TIMELINE: " + timeline.name);
 			if (assignTimelineToPlayableDirector) _playableDirectorToControl.playableAsset = timeline;
 			if(timeline != _playableDirectorToControl.playableAsset) return;
 			OnEventRaised?.Invoke(timeline, value); 
