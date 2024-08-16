@@ -37,7 +37,8 @@ namespace jeanf.EventSystem
 
 		private void OnEnable()
 		{
-			if (_channel != null)
+            Debug.Log("Played Timeline's enable");
+            if (_channel != null)
 				_channel.OnEventRaised += Respond;
 		}
 
@@ -49,7 +50,6 @@ namespace jeanf.EventSystem
 
 		private void Respond(PlayableAsset timeline, bool value)
 		{
-			Debug.Log("STARTING TIMELINE: " + timeline.name);
 			if (assignTimelineToPlayableDirector) _playableDirectorToControl.playableAsset = timeline;
 			if(timeline != _playableDirectorToControl.playableAsset) return;
 			OnEventRaised?.Invoke(timeline, value); 
