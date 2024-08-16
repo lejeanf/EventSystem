@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 /// </summary>
 namespace jeanf.EventSystem
 {
-	[System.Serializable, DefaultExecutionOrder(-1)]
+	[System.Serializable]
 	public class TimelineBoolEvent : UnityEvent<PlayableAsset, bool>
 	{
 
@@ -17,6 +17,7 @@ namespace jeanf.EventSystem
 	/// <summary>
 	/// A flexible handler for int events in the form of a MonoBehaviour. Responses can be connected directly from the Unity Inspector.
 	/// </summary>
+	[DefaultExecutionOrder(-1)]
 	public class TimelineTriggerEventListener : MonoBehaviour, IDebugBehaviour
 	{
 		public bool isDebug
