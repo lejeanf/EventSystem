@@ -38,7 +38,6 @@ namespace jeanf.EventSystem
 
 		private void OnEnable()
 		{
-            Debug.Log("Played Timeline's enable");
             if (_channel != null)
 				_channel.OnEventRaised += Respond;
 		}
