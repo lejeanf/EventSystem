@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 /// </summary>
 namespace jeanf.EventSystem
 {
-	[System.Serializable]
+	[System.Serializable, DefaultExecutionOrder(-1)]
 	public class TimelineBoolEvent : UnityEvent<PlayableAsset, bool>
 	{
 
