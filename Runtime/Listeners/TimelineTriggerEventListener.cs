@@ -39,9 +39,11 @@ namespace jeanf.EventSystem
 		public TimelineBoolEvent OnEventRaised;
 
 		[SerializeField] private BoolEventChannelSO generalPauseEvent;
+		private bool isStop = true;
 
 		private void OnEnable()
 		{
+            isStop = true;
             if (_channel != null) _channel.OnEventRaised += Respond;
             if (generalPauseEvent) generalPauseEvent.OnEventRaised += Pause;
 		}
@@ -59,31 +61,34 @@ namespace jeanf.EventSystem
 			OnEventRaised?.Invoke(timeline, value); 
 			if (value)
 			{
+				isStop = false;
 				_playableDirectorToControl.Play();
+				_lastPlayableState = _playableDirectorToControl.state;
 			}
 			else
 			{
+				isStop = true;
 				_playableDirectorToControl.Stop();
+				_lastPlayableState = _playableDirectorToControl.state;
 			}
 
-			_lastPlayableState = _playableDirectorToControl.state;
-			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>");
+			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>, timelineState: {_playableDirectorToControl.state}");
 		}
 
 		private void Pause(bool state)
 		{
-			switch (state)
+			switch (state && !isStop)
 			{
 				case true when _lastPlayableState == PlayState.Playing:
 					_playableDirectorToControl.Pause();
+					_lastPlayableState = _playableDirectorToControl.state;
 					break;
 				
 				case false when _lastPlayableState == PlayState.Paused:
 					_playableDirectorToControl.Play();
+					_lastPlayableState = _playableDirectorToControl.state;
 					break;
 			}
-
-			_lastPlayableState = _playableDirectorToControl.state;
 		}
 	}
 }
