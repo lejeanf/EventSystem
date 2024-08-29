@@ -30,7 +30,7 @@ namespace jeanf.EventSystem
 		
 		[SerializeField] private TimelineTriggerEventChannelSO _channel;
 		[SerializeField] private PlayableDirector _playableDirectorToControl;
-		private PlayState _lastPlayableState;
+		private PlayState _lastKnownPlayableState;
 		
 		[Tooltip("Use this if you want to override the timeline assigned to the playable director.")]
 		[SerializeField] private bool assignTimelineToPlayableDirector = true;
@@ -66,14 +66,14 @@ namespace jeanf.EventSystem
 				_playableDirectorToControl.RebuildGraph();
 				_playableDirectorToControl.Play();
 				isStop = false;
-				_lastPlayableState = _playableDirectorToControl.state;
+				_lastKnownPlayableState = _playableDirectorToControl.state;
 				if(isDebug) Debug.Log($"received timeline: playing {timeline.name}, isStop: {isStop}, _playableDirectorToControl.state {_playableDirectorToControl.state}");
 			}
 			else
 			{
 				isStop = true;
 				_playableDirectorToControl.Stop();
-				_lastPlayableState = _playableDirectorToControl.state;
+				_lastKnownPlayableState = _playableDirectorToControl.state;
 				if(isDebug) Debug.Log($"received timeline: stoping {timeline.name}, isStop: {isStop}, _playableDirectorToControl.state {_playableDirectorToControl.state}");
 			}
 
@@ -82,17 +82,18 @@ namespace jeanf.EventSystem
 
 		private void Pause(bool state) // true = pause ... false = unpause
 		{
+			if(isDebug) Debug.Log($"isStop = {isStop}, state {state}, _lastPlayableState {_lastKnownPlayableState}");
 			if(isStop) return;
 
-			switch (_lastPlayableState)
+			switch (_lastKnownPlayableState)
 			{
 				case PlayState.Playing:
 					if (state)
 					{
 						_playableDirectorToControl.Pause();
-						_lastPlayableState = _playableDirectorToControl.state;
+						_lastKnownPlayableState = _playableDirectorToControl.state;
 						
-						if(isDebug) Debug.Log($"_lastPlayableState = PlayState.isPlaying : pausing the timeline");
+						if(isDebug) Debug.Log($"_lastPlayableState = {_lastKnownPlayableState} : pausing the timeline");
 					}
 					break;
 				
@@ -101,8 +102,8 @@ namespace jeanf.EventSystem
 					{
 						isStop = false;
 						_playableDirectorToControl.Play();
-						_lastPlayableState = _playableDirectorToControl.state;
-						if(isDebug) Debug.Log($"_lastPlayableState = PlayState.Paused : continuing playing the timeline");
+						_lastKnownPlayableState = _playableDirectorToControl.state;
+						if(isDebug) Debug.Log($"_lastPlayableState = {_lastKnownPlayableState}  : continuing playing the timeline");
 					}
 					break;
 				case PlayState.Delayed:
