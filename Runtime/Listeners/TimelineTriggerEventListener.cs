@@ -68,16 +68,21 @@ namespace jeanf.EventSystem
 			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>");
 		}
 
+		private PlayState _lastPlayableState;
 		private void Pause(bool state)
 		{
-			if (state)
+			switch (state)
 			{
-				_playableDirectorToControl.Pause();
+				case true when _lastPlayableState == PlayState.Playing:
+					_playableDirectorToControl.Pause();
+					break;
+				
+				case false when _lastPlayableState == PlayState.Paused:
+					_playableDirectorToControl.Play();
+					break;
 			}
-			else
-			{
-				_playableDirectorToControl.Play(); 
-			}
+
+			_lastPlayableState = _playableDirectorToControl.state;
 		}
 	}
 }
