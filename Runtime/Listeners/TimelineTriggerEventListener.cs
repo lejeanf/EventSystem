@@ -36,16 +36,20 @@ namespace jeanf.EventSystem
 		[Tooltip("If you want to do more than just turning triggering play/stop on the timeline")]
 		public TimelineBoolEvent OnEventRaised;
 
+		[SerializeField] private BoolEventChannelSO generalPauseEvent;
+
 		private void OnEnable()
 		{
             if (_channel != null)
 				_channel.OnEventRaised += Respond;
+            if (generalPauseEvent) generalPauseEvent.OnEventRaised += Pause;
 		}
 
 		private void OnDisable()
 		{
 			if (_channel != null)
 				_channel.OnEventRaised -= Respond;
+			if (generalPauseEvent) generalPauseEvent.OnEventRaised -= Pause;
 		}
 
 		private void Respond(PlayableAsset timeline, bool value)
@@ -62,6 +66,18 @@ namespace jeanf.EventSystem
 				_playableDirectorToControl.Stop();
 			}
 			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>");
+		}
+
+		private void Pause(bool state)
+		{
+			if (state)
+			{
+				_playableDirectorToControl.Pause();
+			}
+			else
+			{
+				_playableDirectorToControl.Play(); 
+			}
 		}
 	}
 }
