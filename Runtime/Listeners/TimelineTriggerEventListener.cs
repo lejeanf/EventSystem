@@ -64,14 +64,16 @@ namespace jeanf.EventSystem
 			{
 				isStop = false;
 				_playableDirectorToControl.Play();
-				_lastPlayableState = PlayState.Playing;
+				if(isDebug) Debug.Log($"received timeline: playing {timeline.name}, isStop: {isStop}, _playableDirectorToControl.state {_playableDirectorToControl.state}");
 			}
 			else
 			{
 				isStop = true;
 				_playableDirectorToControl.Stop();
-				_lastPlayableState = PlayState.Paused;
+				if(isDebug) Debug.Log($"received timeline: stoping {timeline.name}, isStop: {isStop}, _playableDirectorToControl.state {_playableDirectorToControl.state}");
 			}
+
+			_lastPlayableState = _playableDirectorToControl.state;
 
 			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>, timelineState: {_playableDirectorToControl.state}");
 		}
@@ -86,7 +88,9 @@ namespace jeanf.EventSystem
 					if (state)
 					{
 						_playableDirectorToControl.Pause();
-						_lastPlayableState = PlayState.Paused;
+						_lastPlayableState = _playableDirectorToControl.state;
+						
+						if(isDebug) Debug.Log($"_lastPlayableState = PlayState.isPlaying : pausing the timeline");
 					}
 					break;
 				
@@ -95,7 +99,8 @@ namespace jeanf.EventSystem
 					{
 						isStop = false;
 						_playableDirectorToControl.Play();
-						_lastPlayableState = PlayState.Playing;
+						_lastPlayableState = _playableDirectorToControl.state;
+						if(isDebug) Debug.Log($"_lastPlayableState = PlayState.Paused : continuing playing the timeline");
 					}
 					break;
 				case PlayState.Delayed:
@@ -103,6 +108,7 @@ namespace jeanf.EventSystem
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+			if(isDebug) Debug.Log($"playableDirectorToControl {_playableDirectorToControl.state}");
 		}
 	}
 }
