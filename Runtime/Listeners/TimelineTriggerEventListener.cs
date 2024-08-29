@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
@@ -63,31 +64,44 @@ namespace jeanf.EventSystem
 			{
 				isStop = false;
 				_playableDirectorToControl.Play();
-				_lastPlayableState = _playableDirectorToControl.state;
+				_lastPlayableState = PlayState.Playing;
 			}
 			else
 			{
 				isStop = true;
 				_playableDirectorToControl.Stop();
-				_lastPlayableState = _playableDirectorToControl.state;
+				_lastPlayableState = PlayState.Paused;
 			}
 
 			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>, timelineState: {_playableDirectorToControl.state}");
 		}
 
-		private void Pause(bool state)
+		private void Pause(bool state) // true = pause ... false = unpause
 		{
-			switch (state && !isStop)
+			if(isStop) return;
+
+			switch (_lastPlayableState)
 			{
-				case true when _lastPlayableState == PlayState.Playing:
-					_playableDirectorToControl.Pause();
-					_lastPlayableState = _playableDirectorToControl.state;
+				case PlayState.Playing:
+					if (state)
+					{
+						_playableDirectorToControl.Pause();
+						_lastPlayableState = PlayState.Paused;
+					}
 					break;
 				
-				case false when _lastPlayableState == PlayState.Paused:
-					_playableDirectorToControl.Play();
-					_lastPlayableState = _playableDirectorToControl.state;
+				case PlayState.Paused:
+					if (!state)
+					{
+						isStop = false;
+						_playableDirectorToControl.Play();
+						_lastPlayableState = PlayState.Playing;
+					}
 					break;
+				case PlayState.Delayed:
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 		}
 	}
