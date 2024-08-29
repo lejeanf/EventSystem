@@ -62,18 +62,20 @@ namespace jeanf.EventSystem
 			OnEventRaised?.Invoke(timeline, value); 
 			if (value)
 			{
-				isStop = false;
+				_playableDirectorToControl.Stop();
+				_playableDirectorToControl.RebuildGraph();
 				_playableDirectorToControl.Play();
+				isStop = false;
+				_lastPlayableState = _playableDirectorToControl.state;
 				if(isDebug) Debug.Log($"received timeline: playing {timeline.name}, isStop: {isStop}, _playableDirectorToControl.state {_playableDirectorToControl.state}");
 			}
 			else
 			{
 				isStop = true;
 				_playableDirectorToControl.Stop();
+				_lastPlayableState = _playableDirectorToControl.state;
 				if(isDebug) Debug.Log($"received timeline: stoping {timeline.name}, isStop: {isStop}, _playableDirectorToControl.state {_playableDirectorToControl.state}");
 			}
-
-			_lastPlayableState = _playableDirectorToControl.state;
 
 			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>, timelineState: {_playableDirectorToControl.state}");
 		}
