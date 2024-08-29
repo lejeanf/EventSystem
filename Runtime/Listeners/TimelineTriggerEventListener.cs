@@ -29,6 +29,8 @@ namespace jeanf.EventSystem
 		
 		[SerializeField] private TimelineTriggerEventChannelSO _channel;
 		[SerializeField] private PlayableDirector _playableDirectorToControl;
+		private PlayState _lastPlayableState;
+		
 		[Tooltip("Use this if you want to override the timeline assigned to the playable director.")]
 		[SerializeField] private bool assignTimelineToPlayableDirector = true;
 		[Space(10)]
@@ -40,15 +42,13 @@ namespace jeanf.EventSystem
 
 		private void OnEnable()
 		{
-            if (_channel != null)
-				_channel.OnEventRaised += Respond;
+            if (_channel != null) _channel.OnEventRaised += Respond;
             if (generalPauseEvent) generalPauseEvent.OnEventRaised += Pause;
 		}
 
 		private void OnDisable()
 		{
-			if (_channel != null)
-				_channel.OnEventRaised -= Respond;
+			if (_channel != null) _channel.OnEventRaised -= Respond;
 			if (generalPauseEvent) generalPauseEvent.OnEventRaised -= Pause;
 		}
 
@@ -65,10 +65,11 @@ namespace jeanf.EventSystem
 			{
 				_playableDirectorToControl.Stop();
 			}
+
+			_lastPlayableState = _playableDirectorToControl.state;
 			if(isDebug) Debug.Log($" timeline-bool event raised: <{timeline},{value}>");
 		}
 
-		private PlayState _lastPlayableState;
 		private void Pause(bool state)
 		{
 			switch (state)
