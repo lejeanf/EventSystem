@@ -12,3 +12,8 @@ In order to find this package in unity's package manager make sure to add the sc
 
 	Contributors:
 [Code] Felix Cotes-Charlebois <a href="https://github.com/Percevent13">
+
+
+LICENCE:
+
+<img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></img>
