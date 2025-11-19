@@ -1,7 +1,6 @@
 #if UNITY_EDITOR
-
-using jeanf.EventSystem;
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -9,7 +8,7 @@ namespace jeanf.EventSystem
 {
     public class SendTimelineTriggerEventOnClick : MonoBehaviour
     {
-        
+     #if UNITY_EDITOR   
         [Header("Broadcasting on:")] [SerializeField]
         private TimelineTriggerEventChannelSO TestChannel;
 
@@ -20,8 +19,10 @@ namespace jeanf.EventSystem
         {
             TestChannel.RaiseEvent(timeline, state);
         }
+        #endif
     }
     
+    #if UNITY_EDITOR
     [CustomEditor(typeof(SendTimelineTriggerEventOnClick))]
     public class SendTimelineTriggerEventOnClickEditor : Editor {
         override public void  OnInspectorGUI () {
@@ -33,6 +34,5 @@ namespace jeanf.EventSystem
             GUILayout.Space(10);
         }
     }
+    #endif
 }
-
-#endif

@@ -1,12 +1,13 @@
 #if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace jeanf.EventSystem
 {
     public class SendStringBoolEventOnClick : MonoBehaviour
     {
-
+        #if UNITY_EDITOR
         [Header("Broadcasting on:")]
         [SerializeField]
         private StringBoolEventChannelSO TestChannel;
@@ -19,8 +20,10 @@ namespace jeanf.EventSystem
         {
             TestChannel.RaiseEvent(textToSend, valueToSend);
         }
+        #endif
     }
 
+    #if UNITY_EDITOR
     [CustomEditor(typeof(SendStringBoolEventOnClick))]
     public class StringBoolEventOnClickEditor : Editor
     {
@@ -35,6 +38,5 @@ namespace jeanf.EventSystem
             GUILayout.Space(10);
         }
     }
+    #endif
 }
-#endif
-

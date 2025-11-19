@@ -1,14 +1,13 @@
 #if UNITY_EDITOR
-
-using jeanf.EventSystem;
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace jeanf.EventSystem
 {
     public class SendInputActionIntEventOnClick : MonoBehaviour
     {
-
+        #if UNITY_EDITOR
         [Header("Broadcasting on:")]
         [SerializeField]
         private InputActionIntEventChannelSO TestChannel;
@@ -20,8 +19,10 @@ namespace jeanf.EventSystem
         {
             TestChannel.RaiseEvent(actionToSend, intToSend);
         }
+        #endif
     }
 
+    #if UNITY_EDITOR
     [CustomEditor(typeof(SendInputActionIntEventOnClick))]
     public class InputActionIntEventOnClickEditor : Editor
     {
@@ -36,6 +37,5 @@ namespace jeanf.EventSystem
             GUILayout.Space(10);
         }
     }
+    #endif
 }
-
-#endif

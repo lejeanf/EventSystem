@@ -1,13 +1,14 @@
 #if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
+#endif
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace jeanf.EventSystem
 {
     public class StringListEventOnClick : MonoBehaviour
     {
+        #if UNITY_EDITOR
         [Header("Broadcasting On:")]
         [SerializeField] private StringListEventChannelSO testChannel;
 
@@ -18,8 +19,10 @@ namespace jeanf.EventSystem
         {
             testChannel.RaiseEvent(valueToSend);
         }
+        #endif
     }
 
+    #if UNITY_EDITOR
     [CustomEditor(typeof(StringListEventOnClick))]
     public class SendStringEventOnClickEditor: Editor
     {
@@ -34,6 +37,6 @@ namespace jeanf.EventSystem
             GUILayout.Space(10);
         }
     }
+    #endif
 }
-#endif
 

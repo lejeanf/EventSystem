@@ -1,14 +1,13 @@
 #if UNITY_EDITOR
-
-using jeanf.EventSystem;
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace jeanf.EventSystem
 {
     public class SendIntEventOnClick : MonoBehaviour
     {
-        
+        #if UNITY_EDITOR
         [Header("Broadcasting on:")] [SerializeField]
         private IntEventChannelSO TestChannel;
 
@@ -18,8 +17,10 @@ namespace jeanf.EventSystem
         {
             TestChannel.RaiseEvent(messageToSend);
         }
+        #endif
     }
     
+    #if UNITY_EDITOR
     [CustomEditor(typeof(SendIntEventOnClick))]
     public class IntEventOnClickEditor : Editor {
         override public void  OnInspectorGUI () {
@@ -31,6 +32,5 @@ namespace jeanf.EventSystem
             GUILayout.Space(10);
         }
     }
+    #endif
 }
-
-#endif
