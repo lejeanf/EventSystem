@@ -4,6 +4,9 @@
   "displayName": "Event System",
   "description": "This package contains a basic Event System based on Scriptable Objects as communication medium",
   "unity": "2021.3",
+  "repository": {
+    "url": "https://github.com/lejeanf/EventSystem"
+  },
   "keywords": [
     "jeanf",
     "event system"
