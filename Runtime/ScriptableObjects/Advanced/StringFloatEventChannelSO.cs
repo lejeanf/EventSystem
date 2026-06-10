@@ -1,17 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace jeanf.EventSystem
 {
-    [CreateAssetMenu(menuName = "Events/Advanced/<string,float> Event Channel")]
-    
+    [CreateAssetMenu(menuName = "Events/Advanced/<String,Float> Event Channel")]
     public class StringFloatEventChannelSO : DescriptionBaseSO
     {
-        public UnityAction<string, float> OnEventRaised;
+        [NonSerialized] private UnityAction<string, float> _onEventRaised;
+
+        public event UnityAction<string, float> OnEventRaised
+        {
+            add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+            remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+        }
 
         public void RaiseEvent(string str, float value)
         {
-            OnEventRaised?.Invoke(str, value);
+            CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(str, value);
         }
     }
 }

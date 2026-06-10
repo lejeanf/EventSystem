@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace jeanf.EventSystem
@@ -6,11 +7,17 @@ namespace jeanf.EventSystem
 	[CreateAssetMenu(menuName = "Events/Transform Event Channel")]
 	public class TransformEventChannelSO : DescriptionBaseSO
 	{
-		public UnityAction<Transform> OnEventRaised;
+		[NonSerialized] private UnityAction<Transform> _onEventRaised;
+
+		public event UnityAction<Transform> OnEventRaised
+		{
+			add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+			remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+		}
 
 		public void RaiseEvent(Transform value)
 		{
-			OnEventRaised?.Invoke(value);
+			CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(value);
 		}
 	}
 }

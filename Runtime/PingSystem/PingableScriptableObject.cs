@@ -47,11 +47,11 @@ namespace jeanf.EventSystem
             if (channel != null)
             {
                 channel.UnsubscribeEvent(id, channel);
-                channel.OnEventRaised -= null;
+                channel.OnEventRaised -= Respond;
             }
     
-            if (refreshPingableObjects.OnEventRaised != null)
-                refreshPingableObjects.OnEventRaised -= null;
+            if (refreshPingableObjects != null)
+                refreshPingableObjects.OnEventRaised -= RefreshPingable;
         }
     
         private void Respond(string id, ScriptableObject value)

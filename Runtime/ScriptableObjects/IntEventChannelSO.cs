@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -10,12 +11,17 @@ namespace jeanf.EventSystem
 	[CreateAssetMenu(menuName = "Events/Int Event Channel")]
 	public class IntEventChannelSO : DescriptionBaseSO
 	{
-		public UnityAction<int> OnEventRaised;
+		[NonSerialized] private UnityAction<int> _onEventRaised;
+
+		public event UnityAction<int> OnEventRaised
+		{
+			add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+			remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+		}
 
 		public void RaiseEvent(int value)
 		{
-			if (OnEventRaised != null)
-				OnEventRaised.Invoke(value);
+			CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(value);
 		}
 	}
 }

@@ -7,12 +7,18 @@ namespace jeanf.EventSystem
     [CreateAssetMenu(menuName = "Events/Void Event Channel")]
     public class VoidEventChannelSO : DescriptionBaseSO
     {
-        public UnityAction OnEventRaised;
+        [NonSerialized] private UnityAction _onEventRaised;
+
+        public event UnityAction OnEventRaised
+        {
+            add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+            remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+        }
 
         public void RaiseEvent()
         {
-            OnEventRaised?.Invoke();
+            CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke();
         }
     }
-    
+
 }

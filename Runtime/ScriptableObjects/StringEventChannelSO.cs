@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -10,11 +11,20 @@ namespace jeanf.EventSystem
     [CreateAssetMenu(menuName = "Events/String Event Channel")]
     public class StringEventChannelSO : DescriptionBaseSO
     {
-        public UnityAction<string> OnEventRaised;
+        // OnEventRaised is exposed as an event so add/remove can be redirected onto the
+        // canonical instance held by CanonicalChannelResolver. The backing delegate lives only
+        // on the canonical; duplicate instances are inert proxies that forward all operations.
+        [NonSerialized] private UnityAction<string> _onEventRaised;
+
+        public event UnityAction<string> OnEventRaised
+        {
+            add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+            remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+        }
 
         public void RaiseEvent(string value)
         {
-            OnEventRaised?.Invoke(value);
+            CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(value);
         }
     }
 }

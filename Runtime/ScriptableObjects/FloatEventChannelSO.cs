@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -10,12 +11,17 @@ namespace jeanf.EventSystem
 	[CreateAssetMenu(menuName = "Events/Float Event Channel")]
 	public class FloatEventChannelSO : DescriptionBaseSO
 	{
-		public UnityAction<float> OnEventRaised;
+		[NonSerialized] private UnityAction<float> _onEventRaised;
+
+		public event UnityAction<float> OnEventRaised
+		{
+			add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+			remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+		}
 
 		public void RaiseEvent(float value)
 		{
-			if (OnEventRaised != null)
-				OnEventRaised.Invoke(value);
+			CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(value);
 		}
 	}
 }

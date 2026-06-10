@@ -1,21 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// This class is used for Events that have one int argument.
-/// Example: An Achievement unlock event, where the int is the Achievement ID.
-/// </summary>
 namespace jeanf.EventSystem
 {
 	[CreateAssetMenu(menuName = "Events/Quaternion Event Channel")]
 	public class QuaternionEventChannelSO : DescriptionBaseSO
 	{
-		public UnityAction<Quaternion> OnEventRaised;
+		[NonSerialized] private UnityAction<Quaternion> _onEventRaised;
+
+		public event UnityAction<Quaternion> OnEventRaised
+		{
+			add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+			remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+		}
 
 		public void RaiseEvent(Quaternion value)
 		{
-			if (OnEventRaised != null)
-				OnEventRaised.Invoke(value);
+			CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(value);
 		}
 	}
 }

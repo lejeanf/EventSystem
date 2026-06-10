@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -8,7 +9,13 @@ namespace jeanf.EventSystem
 
     public class ActionRebindEventChannelSO : DescriptionBaseSO
     {
-        public UnityAction<InputAction, int> OnEventRaised;
+        [NonSerialized] private UnityAction<InputAction, int> _onEventRaised;
+
+        public event UnityAction<InputAction, int> OnEventRaised
+        {
+            add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+            remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+        }
 
         public void RaiseEvent(InputAction action, string bindingPath)
         {
@@ -22,16 +29,14 @@ namespace jeanf.EventSystem
                 }
                 index = action.GetBindingIndex(bindingToRebind);
             }
-            OnEventRaised?.Invoke(action, index);
+            CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(action, index);
         }
 
         public void RaiseEvent(InputAction action, int index)
         {
-            
-            OnEventRaised?.Invoke(action, index);
+            CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(action, index);
         }
     }
 
 
 }
-

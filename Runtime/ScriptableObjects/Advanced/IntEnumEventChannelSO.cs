@@ -5,14 +5,19 @@ using UnityEngine.Events;
 namespace jeanf.EventSystem
 {
     [CreateAssetMenu(menuName = "Events/Advanced/<Int,Enum> Event Channel")]
-    
     public class IntEnumEventChannelSO : DescriptionBaseSO
     {
-        public UnityAction<int, Enum> OnEventRaised;
+        [NonSerialized] private UnityAction<int, Enum> _onEventRaised;
+
+        public event UnityAction<int, Enum> OnEventRaised
+        {
+            add { CanonicalChannelResolver.GetCanonical(this)._onEventRaised += value; }
+            remove { CanonicalChannelResolver.GetCanonical(this)._onEventRaised -= value; }
+        }
 
         public void RaiseEvent(int nb, Enum value)
         {
-            OnEventRaised?.Invoke(nb, value);
+            CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(nb, value);
         }
     }
 }
