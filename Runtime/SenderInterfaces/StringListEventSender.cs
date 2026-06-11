@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class StringListEventSender : MonoBehaviour, IDebugBehaviour
+    public class StringListEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         {
@@ -13,10 +13,11 @@ namespace jeanf.EventSystem
         }
         [SerializeField] private bool _isDebug = false;
         [field: Header("Broadcasting on:")] public StringListEventChannelSO stringListEventChannel;
+        public Component Source => this;
 
         public void SendStringList(List<string> list)
         {
-            stringListEventChannel.RaiseEvent(list);
+            this.Publish(() => stringListEventChannel.RaiseEvent(list));
         }
 
     }

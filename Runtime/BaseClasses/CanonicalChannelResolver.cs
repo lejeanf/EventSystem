@@ -37,6 +37,8 @@ namespace jeanf.EventSystem
             if (self == null)
                 return null;
 
+            EventDiagnostics.NoteSeen(self);
+
             var resolver = Resolve;
             if (resolver == null)
                 return self;

@@ -18,6 +18,7 @@ namespace jeanf.EventSystem
 
         public void RaiseEvent(PlayableAsset timeline, bool state)
         {
+            EventDiagnostics.RecordRaise(this, (timeline, state));
             CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(timeline, state);
         }
     }

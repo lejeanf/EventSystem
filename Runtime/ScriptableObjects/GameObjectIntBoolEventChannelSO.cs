@@ -17,6 +17,7 @@ namespace jeanf.EventSystem
 
 		public void RaiseEvent(GameObject gameObject, int number, bool value)
 		{
+			EventDiagnostics.RecordRaise(this, (gameObject, number, value));
 			CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(gameObject, number, value);
 		}
 	}

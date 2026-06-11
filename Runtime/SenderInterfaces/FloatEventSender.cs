@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class FloatEventSender : MonoBehaviour, IDebugBehaviour
+    public class FloatEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         { 
@@ -13,10 +13,11 @@ namespace jeanf.EventSystem
         [SerializeField] private bool _isDebug = false;
 
         [field: Header("Broadcasting on:")] public FloatEventChannelSO floatMessageChannel;
+        public Component Source => this;
     
         public void SendFloat(float value)
         {
-            floatMessageChannel.RaiseEvent(value);
+            this.Publish(() => floatMessageChannel.RaiseEvent(value));
         }
     }
 }

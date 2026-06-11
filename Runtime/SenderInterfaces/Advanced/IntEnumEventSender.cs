@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class IntEnumEventSender : MonoBehaviour, IDebugBehaviour
+    public class IntEnumEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         { 
@@ -14,10 +14,11 @@ namespace jeanf.EventSystem
         [SerializeField] private bool _isDebug = false;
 
         [field: Header("Broadcasting on:")] public IntEnumEventChannelSO intEnumMessageChannel;
+        public Component Source => this;
     
         public void SendIntEnum(int nb, Enum value)
         {
-            intEnumMessageChannel.RaiseEvent(nb, value);
+            this.Publish(() => intEnumMessageChannel.RaiseEvent(nb, value));
         }
     }
 }

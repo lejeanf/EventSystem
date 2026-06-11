@@ -29,11 +29,13 @@ namespace jeanf.EventSystem
                 }
                 index = action.GetBindingIndex(bindingToRebind);
             }
+            EventDiagnostics.RecordRaise(this, (action, index));
             CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(action, index);
         }
 
         public void RaiseEvent(InputAction action, int index)
         {
+            EventDiagnostics.RecordRaise(this, (action, index));
             CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(action, index);
         }
     }

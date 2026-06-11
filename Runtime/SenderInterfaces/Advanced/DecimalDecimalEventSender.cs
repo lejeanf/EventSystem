@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class DecimalDecimalEventSender : MonoBehaviour, IDebugBehaviour
+    public class DecimalDecimalEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         { 
@@ -12,10 +12,11 @@ namespace jeanf.EventSystem
         [SerializeField] private bool _isDebug = false;
 
         [field: Header("Broadcasting on:")] public DecimalDecimalEventChannelSO _channel;
+        public Component Source => this;
     
         public void SendIntInt(decimal nb, decimal value)
         {
-            _channel.RaiseEvent(nb, value);
+            this.Publish(() => _channel.RaiseEvent(nb, value));
         }
     }
 }

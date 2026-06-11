@@ -17,6 +17,7 @@ namespace jeanf.EventSystem
 
         public void RaiseEvent(string str1, string str2)
         {
+            EventDiagnostics.RecordRaise(this, (str1, str2));
             CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(str1, str2);
         }
     }

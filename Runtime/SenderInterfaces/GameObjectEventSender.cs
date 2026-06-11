@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class GameObjectEventSender : MonoBehaviour, IDebugBehaviour
+    public class GameObjectEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         { 
@@ -12,10 +12,11 @@ namespace jeanf.EventSystem
         [SerializeField] private bool _isDebug = false;
 
         [field: Header("Broadcasting on:")] public GameObjectEventChannelSO GameObjectMessageChannel;
+        public Component Source => this;
     
         public void SendGameObject(GameObject value)
         {
-            GameObjectMessageChannel.RaiseEvent(value);
+            this.Publish(() => GameObjectMessageChannel.RaiseEvent(value));
         }
     }
 }

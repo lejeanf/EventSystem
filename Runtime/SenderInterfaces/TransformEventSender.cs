@@ -3,7 +3,7 @@ using jeanf.propertyDrawer;
 
 namespace jeanf.EventSystem
 {
-    public class TransformEventSender : MonoBehaviour, IDebugBehaviour
+    public class TransformEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         { 
@@ -17,10 +17,11 @@ namespace jeanf.EventSystem
         [SerializeField] private Transform _transform;
 
         [Header("Broadcasting on:")] public TransformEventChannelSO transformMessageChannel;
+        public Component Source => this;
     
         public void SendTransform(Transform value)
         {
-            transformMessageChannel.RaiseEvent(value);
+            this.Publish(() => transformMessageChannel.RaiseEvent(value));
         }
 
         public void SendCustomTransform()

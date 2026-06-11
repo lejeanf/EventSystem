@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 namespace jeanf.EventSystem
 {
-    public class DecimalFloatEventSender : MonoBehaviour, IDebugBehaviour
+    public class DecimalFloatEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         { 
@@ -13,10 +13,11 @@ namespace jeanf.EventSystem
         [SerializeField] private bool _isDebug = false;
 
         [field: Header("Broadcasting on:")] public DecimalFloatEventChannelSO channel;
+        public Component Source => this;
     
         public void SendIntFloat(int nb, float value)
         {
-            channel.RaiseEvent(nb, value);
+            this.Publish(() => channel.RaiseEvent(nb, value));
         }
     }
 }

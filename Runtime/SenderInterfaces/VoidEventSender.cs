@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace jeanf.EventSystem
 {
-    public class VoidEventSender : MonoBehaviour, IDebugBehaviour
+    public class VoidEventSender : MonoBehaviour, IDebugBehaviour, IEventPublisher
     {
         public bool isDebug
         { 
@@ -12,6 +12,7 @@ namespace jeanf.EventSystem
         [SerializeField] private bool _isDebug = false;
 
         [field: Header("Broadcasting on:")] public VoidEventChannelSO voidMessageChannel;
+        public Component Source => this;
 
         [SerializeField] private bool sendEventOnAwake = true;
 
@@ -29,7 +30,7 @@ namespace jeanf.EventSystem
                 return;
             }
 
-            voidMessageChannel.RaiseEvent();
+            this.Publish(() => voidMessageChannel.RaiseEvent());
         }
     }
 }

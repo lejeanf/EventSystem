@@ -16,6 +16,7 @@ public class BoolFloatEventChannelSO : DescriptionBaseSO, RaiseEvent
 
     public void RaiseEvent(bool boolean, float value)
     {
+        EventDiagnostics.RecordRaise(this, (boolean, value));
         CanonicalChannelResolver.GetCanonical(this)._onEventRaised?.Invoke(boolean, value);
     }
 }
