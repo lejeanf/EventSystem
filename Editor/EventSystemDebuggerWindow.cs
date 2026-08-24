@@ -31,7 +31,7 @@ namespace jeanf.EventSystem.EditorTools
 
         const BindingFlags FieldFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
-        [MenuItem("Tools/EventSystem/Event System Debugger")]
+        [MenuItem("Tools/Jeanf/EventSystem/Event System Debugger")]
         static void Open()
         {
             var w = GetWindow<EventSystemDebuggerWindow>();
