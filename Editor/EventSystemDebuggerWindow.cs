@@ -237,7 +237,7 @@ namespace jeanf.EventSystem.EditorTools
                     GUILayout.Space(16);
                     GUILayout.Label(isCanonical ? "[CANONICAL]" : "[duplicate]",
                         isCanonical ? EditorStyles.miniBoldLabel : EditorStyles.miniLabel, GUILayout.Width(86));
-                    GUILayout.Label($"id {so.GetInstanceID()}", EditorStyles.miniLabel, GUILayout.Width(96));
+                    GUILayout.Label($"id {so.GetEntityId()}", EditorStyles.miniLabel, GUILayout.Width(96));
                     GUILayout.Label($"thread {rec.firstSeenThreadId}" + (rec.seenOffMainThread ? " ⚠" : ""),
                         EditorStyles.miniLabel, GUILayout.Width(90));
                     if (GUILayout.Button("Ping asset", EditorStyles.miniButton, GUILayout.Width(74)))
@@ -341,14 +341,14 @@ namespace jeanf.EventSystem.EditorTools
         List<PubInfo> GetPublishers(Group g)
         {
             var list = new List<PubInfo>();
-            var seen = new HashSet<int>();
+            var seen = new HashSet<EntityId>();
 
             foreach (var pr in EventDiagnostics.SnapshotPublishers(g.groupKey))
             {
                 Component c = null;
                 pr.component?.TryGetTarget(out c);
                 if (c == null) continue;
-                if (!seen.Add(c.GetInstanceID())) continue;
+                if (!seen.Add(c.GetEntityId())) continue;
                 list.Add(new PubInfo { comp = c, label = pr.typeName });
             }
 
@@ -357,7 +357,7 @@ namespace jeanf.EventSystem.EditorTools
                 foreach (var c in scanned)
                 {
                     if (c == null) continue;
-                    if (!seen.Add(c.GetInstanceID())) continue;
+                    if (!seen.Add(c.GetEntityId())) continue;
                     list.Add(new PubInfo { comp = c, label = c.GetType().Name });
                 }
             }
